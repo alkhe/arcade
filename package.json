@@ -1,0 +1,21 @@
+{
+  "name": "arcade",
+  "version": "0.1.0",
+  "description": "A minimal interface for application views.",
+  "main": "./lib/index.js",
+  "repository": {
+    "url": "https://github.com/edge/arcade",
+    "type": "git"
+  },
+  "author": "edge <functaire@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0"
+  },
+  "scripts": {
+    "build": "babel src -d lib",
+    "watch": "babel src -d lib -w"
+  }
+}
