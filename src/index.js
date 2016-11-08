@@ -1,6 +1,7 @@
 import { fnode, hnode } from './vnode'
-import { expand, render } from './html-renderer'
-import diff from './diff'
+import expand from './expand'
+import render from './html-renderer'
+import { diff } from './diff'
 
 import { prettyPrint as html } from 'html'
 
@@ -23,7 +24,7 @@ let avt0 = hnode(Document, {
 let cvt0 = expand(avt0)
 
 let avt1 = hnode(Document, {
-	children: [hnode(List(['sdfj']), { a: 5 })]
+	children: [hnode(List(['sdfj']), { width: 500 })]
 })
 
 let cvt1 = expand(avt1)

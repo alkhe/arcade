@@ -1,4 +1,4 @@
-import { getLabel, getMeta, getChildren, isContent, own } from './util'
+import { getLabel, getMeta, getChildren, isContent, exists, own } from './util'
 
 const enumerate = (start = 0) => () => start++
 /*
@@ -108,7 +108,7 @@ const diff = (old_fnode, new_fnode, index = 0) => {
 
 	for (let i = 0; i < diff_len; i++) {
 		let child_diff = diff(old_children[i], new_children[i], i)
-		if (child_diff != null) {
+		if (exists(child_diff)) {
 			diffs.push(diff(old_children[i], new_children[i], i))
 		}
 	}
@@ -122,4 +122,16 @@ const diff = (old_fnode, new_fnode, index = 0) => {
 	return diffs.length > 0 ? descend(index, diffs) : null
 }
 
-export default diff
+export {
+	diff,
+
+	DESCEND_DIFF,
+	INSERTION,
+	DELETION,
+	SUBSTITUTION,
+	PROPS_PATCH,
+	REPLACE_CHILDREN,
+
+	DEL_PROP,
+	UPD_PROP
+}
