@@ -23,7 +23,6 @@ const run = (root, Component, store) => {
 	})
 
 	raf(function tick() {
-		console.log('asd')
 		for (let i = 0; i < patch_buffer.length; i++) {
 			patch(app, patch_buffer[i])
 		}
