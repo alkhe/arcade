@@ -49,6 +49,7 @@ const del_prop = k => ({ type: DEL_PROP, k })
 const diff_meta = (old_meta, new_meta) => {
 	let diffs = []
 
+	// if new_meta does not have a key on old_meta, produce a prop deletion
 	for (let k in old_meta) if (own(old_meta, k)) {
 		let old_prop = old_meta[k]
 		let new_has_prop = own(new_meta, k)
@@ -57,6 +58,7 @@ const diff_meta = (old_meta, new_meta) => {
 		}
 	}
 
+	// if old_meta does not have a key on new_meta or that prop is outdated, produce a prop update
 	for (let k in new_meta) if (own(new_meta, k)) {
 		let new_prop = new_meta[k]
 		let old_has_prop = own(old_meta, k)
@@ -106,6 +108,7 @@ const diff = (old_fnode, new_fnode, index = 0) => {
 	let diff_len = Math.min(old_children_length, new_children_length)
 	let remainder = new_children_length - old_children_length
 
+	// branching point
 	for (let i = 0; i < diff_len; i++) {
 		let child_diff = diff(old_children[i], new_children[i], i)
 		if (exists(child_diff)) {
@@ -114,8 +117,10 @@ const diff = (old_fnode, new_fnode, index = 0) => {
 	}
 
 	if (remainder < 0) {
+		// remainder is negative, old has more children
 		diffs.push(old_children.slice(diff_len, diff_len - remainder).map((_, i) => deletion(i + diff_len)))
 	} else if (remainder > 0) {
+		// remainder is positive, new has more children
 		diffs.push(new_children.slice(diff_len, diff_len + remainder).map((node, i) => insertion(i + diff_len, node)))
 	}
 

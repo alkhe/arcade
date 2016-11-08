@@ -13,12 +13,13 @@ const hnode = (label, meta) => [label, meta]
 /*
  * Label : String | Function
  * Meta : { String Any }
+ * Content : String | Number
  * Children : [VNode]
  *
  * CNode : (String, Meta, Children)
  * HNode : (Function, Meta)
  *
- * VNode : (Label, Meta)
+ * VNode : (Label, Meta) | Content
  *
  * VNode <= CNode
  * (label, meta, children)

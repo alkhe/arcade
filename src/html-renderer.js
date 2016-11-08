@@ -11,6 +11,7 @@ const render = fnode => {
 	if (isContent(fnode)) return escapeContent(fnode)
 
 	let label = getLabel(fnode)
+
 	let out = `<${ label }${ metaToAttributeString(getMeta(fnode)) }>`
 	if (!isVoidElement(label)) {
 		out += `${ getChildren(fnode).map(render).join('') }</${ label }>`
