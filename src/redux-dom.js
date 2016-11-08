@@ -13,8 +13,7 @@ const run = (root, Component, store) => {
 	let patch_buffer = []
 
 	let tree = expand(hnode(Component, {}), { store })
-	const app = render(tree)
-	root.appendChild(app)
+	let app
 
 	store.subscribe(state => {
 		const new_tree = expand(hnode(Component, {}), { store })
@@ -22,14 +21,21 @@ const run = (root, Component, store) => {
 		tree = new_tree
 	})
 
-	raf(function tick() {
+	raf(() => {
+		app = render(tree)
+		root.appendChild(app)
+
+		raf(tick)
+	})
+
+	const tick = () => {
 		for (let i = 0; i < patch_buffer.length; i++) {
 			patch(app, patch_buffer[i])
 		}
 		patch_buffer = []
 
 		raf(tick)
-	})
+	}
 }
 
 export {

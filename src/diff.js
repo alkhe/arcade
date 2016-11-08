@@ -1,37 +1,12 @@
 import { getLabel, getMeta, getChildren, isContent, exists, own } from './util'
 
 const enumerate = (start = 0) => () => start++
-/*
-const node_diffs = enumerate()
-
-const INSERTION = node_diffs()
-const DELETION = node_diffs()
-const SUBSTITUTION = node_diffs()
-const PROPS_PATCH = node_diffs()
-const REPLACE_CHILDREN = node_diffs()
-
-const prop_diffs = enumerate()
-
-const DEL_PROP = prop_diffs()
-const UPD_PROP = prop_diffs()
-
-const descend = (index, diffs) => [DESCEND_DIFF, index, diffs]
-const insertion = (index, node) => [INSERTION, index, node]
-const deletion = index => [DELETION, index]
-const substitution = (index, node) => [SUBSTITUTION, index, node]
-const props_patch = (index, patches) => [PROPS_PATCH, index, patches]
-const replace_children = (index, nodes) => [REPLACE_CHILDREN, index, nodes]
-
-const upd_prop = (k, new_prop) => [UPD_PROP, k, new_prop]
-const del_prop = k => [DEL_PROP, k]
-*/
 
 const DESCEND_DIFF = 'DESCEND_DIFF'
 const INSERTION = 'INSERTION'
 const DELETION = 'DELETION'
 const SUBSTITUTION = 'SUBSTITUTION'
 const PROPS_PATCH = 'PROPS_PATCH'
-const REPLACE_CHILDREN = 'REPLACE_CHILDREN'
 
 const DEL_PROP = 'DEL_PROP'
 const UPD_PROP = 'UPD_PROP'
@@ -41,7 +16,6 @@ const insertion = (index, node) => ({ type: INSERTION, index, node })
 const deletion = index => ({ type: DELETION, index })
 const substitution = (index, node) => ({ type: SUBSTITUTION, index, node })
 const props_patch = (index, patches) => ({ type: PROPS_PATCH, index, patches })
-const replace_children = (index, nodes) => ({ type: REPLACE_CHILDREN, index, nodes })
 
 const upd_prop = (key, prop) => ({ type: UPD_PROP, key, prop })
 const del_prop = key => ({ type: DEL_PROP, key })
@@ -135,7 +109,6 @@ export {
 	DELETION,
 	SUBSTITUTION,
 	PROPS_PATCH,
-	REPLACE_CHILDREN,
 
 	DEL_PROP,
 	UPD_PROP
