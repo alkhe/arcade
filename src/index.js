@@ -1,5 +1,8 @@
 import { fnode, hnode } from './vnode'
 import { expand, render } from './html-renderer'
+import diff from './diff'
+
+import { prettyPrint as html } from 'html'
 
 let Input = attrs => fnode('input', attrs, [])
 
@@ -13,10 +16,21 @@ let Document = meta => fnode('html', {}, [
 	fnode('body', {}, meta.children)
 ])
 
-let avt = hnode(Document, {
+let avt0 = hnode(Document, {
 	children: [hnode(List(['asdf', 'ghjkl']), {})]
 })
 
-let cvt = expand(avt)
+let cvt0 = expand(avt0)
 
-console.log(render(cvt))
+let avt1 = hnode(Document, {
+	children: [hnode(List(['sdfj']), { a: 5 })]
+})
+
+let cvt1 = expand(avt1)
+
+console.log(html(render(cvt0)))
+console.log()
+console.log(html(render(cvt1)))
+console.log()
+
+console.dir(diff(cvt0, cvt1), { depth: null })
