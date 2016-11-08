@@ -4,26 +4,15 @@ import { diff } from '../src/diff'
 import patch from '../src/dom-patcher'
 import { fnode, hnode } from '../src/vnode'
 
-/* jsx
-List = props => {
-	let items = props.items.map(i => <ListItem>{ i }</ListItem)
-	return <ol>{ items }</ol>
-}
-
-ListItem = props => (
-	<li>
-		{ props.children }
-	</li>
+let List = ({ items }) => (
+	<ol>
+		{ items.map(s => <ListItem>{ s }</ListItem>) }
+	</ol>
 )
-*/
 
-let List = props =>
-	fnode('ol', {}, props.items.map(s => hnode(ListItem, { children: s })))
-
-let ListItem = props => fnode('li', {}, [props.children])
+let ListItem = ({ children }) => <li>{ children }</li>
 
 let step = () => patch(app, diff(cvt0, cvt1).diffs)
-// let step = () => console.log('asd')
 
 let avt0 = (
 	<div onclick={ step }>

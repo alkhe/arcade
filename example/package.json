@@ -11,7 +11,8 @@
   "dependencies": {
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.7",
-    "babel-plugin-transform-arcade-jsx": "^0.3.0",
+    "babel-plugin-transform-arcade-jsx": "^0.4.0",
+    "redux": "^3.6.0",
     "webpack": "2.1.0-beta.25"
   },
   "devDependencies": {

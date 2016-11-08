@@ -466,7 +466,7 @@ var patch = function patch(element, edits) {
 				delta--;
 				break;
 			case _diff.SUBSTITUTION:
-				element.replaceChild(children[index], (0, _domRenderer2.default)(edit.node));
+				element.replaceChild((0, _domRenderer2.default)(edit.node), children[index]);
 				break;
 			case _diff.PROPS_PATCH:
 				edit.patches.forEach(function (_ref) {
@@ -925,33 +925,23 @@ var _vnode = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* jsx
-List = props => {
-	let items = props.items.map(i => <ListItem>{ i }</ListItem)
-	return <ol>{ items }</ol>
-}
-
-ListItem = props => (
-	<li>
-		{ props.children }
-	</li>
-)
-*/
-
-var List = function List(props) {
-	return (0, _vnode.fnode)('ol', {}, props.items.map(function (s) {
-		return (0, _vnode.hnode)(ListItem, { children: s });
-	}));
+var List = function List(_ref) {
+	var items = _ref.items;
+	return (0, _vnode.fnode)('ol', {}, ['\n\t\t', items.map(function (s) {
+		return (0, _vnode.hnode)(ListItem, {
+			'children': [s]
+		});
+	}), '\n\t']);
 };
 
-var ListItem = function ListItem(props) {
-	return (0, _vnode.fnode)('li', {}, [props.children]);
+var ListItem = function ListItem(_ref2) {
+	var children = _ref2.children;
+	return (0, _vnode.fnode)('li', {}, [children]);
 };
 
 var step = function step() {
 	return (0, _domPatcher2.default)(app, (0, _diff.diff)(cvt0, cvt1).diffs);
 };
-// let step = () => console.log('asd')
 
 var avt0 = (0, _vnode.fnode)('div', {
 	'onclick': step

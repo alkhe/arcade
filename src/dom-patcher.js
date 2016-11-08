@@ -35,7 +35,7 @@ const patch = (element, edits) => {
 				delta--
 				break
 			case SUBSTITUTION:
-				element.replaceChild(children[index], render(edit.node))
+				element.replaceChild(render(edit.node), children[index])
 				break
 			case PROPS_PATCH:
 				edit.patches.forEach(({ key, prop }) => element[key] = prop)
