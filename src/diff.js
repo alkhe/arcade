@@ -112,7 +112,7 @@ const diff = (old_fnode, new_fnode, index = 0) => {
 	for (let i = 0; i < diff_len; i++) {
 		let child_diff = diff(old_children[i], new_children[i], i)
 		if (exists(child_diff)) {
-			diffs.push(diff(old_children[i], new_children[i], i))
+			diffs.push(child_diff)
 		}
 	}
 
