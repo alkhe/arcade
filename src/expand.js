@@ -9,7 +9,7 @@ import { fnode } from './vnode'
 
 // takes vnode tree
 // tail-call optimization, collapse hnode into fnode
-const expand = vnode => {
+const expand = (vnode, context) => {
 	for (;;) {
 		if (!isObject(vnode)) return vnode
 
@@ -17,9 +17,9 @@ const expand = vnode => {
 		const meta = getMeta(vnode)
 
 		if (isString(label)) {
-			return fnode(label, meta, getChildren(vnode).map(expand))
+			return fnode(label, meta, getChildren(vnode).map(vn => expand(vn, context)))
 		} else {
-			vnode = label(meta)
+			vnode = label(meta, context)
 			continue
 		}
 	}

@@ -20,6 +20,8 @@
     "watch": "babel src -d lib -w"
   },
   "dependencies": {
-    "lodash.flattendeep": "^4.4.0"
+    "babel-plugin-transform-arcade-jsx": "^0.5.0",
+    "lodash.flattendeep": "^4.4.0",
+    "raf": "^3.3.0"
   }
 }
