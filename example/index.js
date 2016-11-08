@@ -1,4 +1,4 @@
-import { fnode, hnode } from '../src/vnode'
+import { fnode, hnode } from '../src'
 import { connect, run } from '../src/redux-dom'
 import { createStore, combineReducers } from 'redux'
 
