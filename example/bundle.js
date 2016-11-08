@@ -1110,7 +1110,6 @@ var run = function run(root, Component, store) {
 	});
 
 	(0, _raf2.default)(function tick() {
-		console.log('asd');
 		for (var i = 0; i < patch_buffer.length; i++) {
 			(0, _domPatcher2.default)(app, patch_buffer[i]);
 		}
@@ -2357,14 +2356,12 @@ var ListItem = function ListItem(_ref2) {
 	return (0, _vnode.fnode)('li', {}, [children]);
 };
 
-var ItemList = (0, _reduxDom.connect)(function (state) {
-	return state;
-})(function (_ref3) {
+var ItemList = function ItemList(_ref3) {
 	var items = _ref3.items;
 	return (0, _vnode.hnode)(List, {
 		'children': [items]
 	});
-});
+};
 
 var Root = function Root(_ref4) {
 	var items = _ref4.items,

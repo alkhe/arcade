@@ -33,7 +33,7 @@ let List = ({ items }) => (
 
 let ListItem = ({ children }) => <li>{ children }</li>
 
-let ItemList = connect(state => state)(({ items }) => <List>{ items }</List>)
+let ItemList = ({ items }) => <List>{ items }</List>
 
 let Root = ({ items, text, setValue, addItem }) => (
 	<div>

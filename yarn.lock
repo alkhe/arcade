@@ -319,12 +319,6 @@ babel-plugin-syntax-trailing-function-commas@^6.3.13, babel-plugin-syntax-traili
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-trailing-function-commas/-/babel-plugin-syntax-trailing-function-commas-6.13.0.tgz#2b84b7d53dd744f94ff1fad7669406274b23f541"
 
-babel-plugin-transform-arcade-jsx:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-arcade-jsx/-/babel-plugin-transform-arcade-jsx-0.5.0.tgz#7a62ee3b79a6e6c45beeb88b1fbd7cbd57282cb7"
-  dependencies:
-    babel-types "^6.18.0"
-
 babel-plugin-transform-async-generator-functions@^6.17.0:
   version "6.17.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-async-generator-functions/-/babel-plugin-transform-async-generator-functions-6.17.0.tgz#d0b5a2b2f0940f2b245fa20a00519ed7bc6cae54"
