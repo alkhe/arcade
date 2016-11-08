@@ -1,5 +1,6 @@
 import {
 	isContent,
+	own,
 	getLabel,
 	getMeta,
 	getChildren
@@ -7,7 +8,8 @@ import {
 
 let api = {
 	text: string => document.createTextNode(string),
-	element: label => document.createElement(label)
+	element: label => document.createElement(label),
+	append: (node, element) => node.appendChild(element)
 }
 
 const render = fnode => {
@@ -15,14 +17,20 @@ const render = fnode => {
 
 	let el = api.element(getLabel(fnode))
 
+	let meta = getMeta(fnode)
+	
+	for (let k in meta) if (own(meta, k)) {
+		el[k] = meta[k]
+	}
+
 	let children = getChildren(fnode)
 	let frag = document.createDocumentFragment()
 
 	for (let i = 0; i < children.length; i++) {
-		frag.appendChild(render(children[i]))
+		api.append(frag, render(children[i]))
 	}
 
-	el.appendChild(frag)
+	api.append(el, frag)
 
 	return el
 }

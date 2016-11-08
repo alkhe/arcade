@@ -5,6 +5,7 @@ import { diff } from './diff'
 
 import { prettyPrint as html } from 'html'
 
+/*
 let Input = attrs => fnode('input', attrs, [])
 
 let List = strings => meta =>
@@ -26,6 +27,20 @@ let cvt0 = expand(avt0)
 let avt1 = hnode(Document, {
 	children: [hnode(List(['sdfj']), { width: 500 })]
 })
+
+let cvt1 = expand(avt1)
+*/
+
+let List = props =>
+	fnode('ol', {}, props.items.map(s => hnode(ListItem, { children: s })))
+
+let ListItem = props => fnode('li', {}, [props.children])
+
+let avt0 = fnode(List, { items: ['Carlos', 'Raphael', 'Josephine'] })
+
+let cvt0 = expand(avt0)
+
+let avt1 = fnode(List, { items: ['Carlos', 'Raphael', 'Josephine', 'Chad'] })
 
 let cvt1 = expand(avt1)
 

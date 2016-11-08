@@ -18,5 +18,8 @@
   "scripts": {
     "build": "babel src -d lib",
     "watch": "babel src -d lib -w"
+  },
+  "dependencies": {
+    "lodash.flattendeep": "^4.4.0"
   }
 }

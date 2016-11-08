@@ -1,5 +1,7 @@
 import expand from '../src/expand'
 import render from '../src/dom-renderer'
+import { diff } from '../src/diff'
+import patch from '../src/dom-patcher'
 import { fnode, hnode } from '../src/vnode'
 
 /* jsx
@@ -20,8 +22,26 @@ let List = props =>
 
 let ListItem = props => fnode('li', {}, [props.children])
 
-let avt = fnode(List, { items: ['Carlos', 'Raphael', 'Josephine'] })
+let step = () => patch(app, diff(cvt0, cvt1).diffs)
+// let step = () => console.log('asd')
 
-let cvt = expand(avt)
+let avt0 = (
+	<div onclick={ step }>
+		<List items={ ['Carlos', 'Raphael', 'Josephine'] } />
+	</div>
+)
 
-document.getElementById('root').appendChild(render(cvt))
+let cvt0 = expand(avt0)
+
+let avt1 = (
+	<div onclick={ step }>
+		<List items={ ['Carlos', 'Raphael', 'Josephine', 'Chad'] } />
+	</div>
+)
+
+let cvt1 = expand(avt1)
+
+let root = document.getElementById('root')
+let app = render(cvt0)
+
+root.appendChild(app)

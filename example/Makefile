@@ -1,4 +1,7 @@
 all: bundle
 
 bundle:
-	webpack --entry ./index.js --output-filename ./bundle.js
+	webpack --config ./wp.babel.js
+
+watch:
+	webpack --config ./wp.babel.js --watch

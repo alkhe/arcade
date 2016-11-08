@@ -43,8 +43,8 @@ const substitution = (index, node) => ({ type: SUBSTITUTION, index, node })
 const props_patch = (index, patches) => ({ type: PROPS_PATCH, index, patches })
 const replace_children = (index, nodes) => ({ type: REPLACE_CHILDREN, index, nodes })
 
-const upd_prop = (k, new_prop) => ({ type: UPD_PROP, k, new_prop })
-const del_prop = k => ({ type: DEL_PROP, k })
+const upd_prop = (key, prop) => ({ type: UPD_PROP, key, prop })
+const del_prop = key => ({ type: DEL_PROP, key })
 
 const diff_meta = (old_meta, new_meta) => {
 	let diffs = []
@@ -78,14 +78,14 @@ const diff = (old_fnode, new_fnode, index = 0) => {
 
 	// Lemma 2
 	// if old or new node are content, substitute
-	if (isContent(old_fnode) || isContent(new_fnode)) return [substitution(index, new_fnode)]
+	if (isContent(old_fnode) || isContent(new_fnode)) return substitution(index, new_fnode)
 
 	// Lemma 3
 	// if different labels, invalidate all
 	let old_label = getLabel(old_fnode)
 	let new_label = getLabel(new_fnode)
 
-	if (old_label !== new_label) return [substitution(index, new_fnode)]
+	if (old_label !== new_label) return substitution(index, new_fnode)
 
 	// Lemma 4
 	// if same labels, diff props
@@ -118,10 +118,10 @@ const diff = (old_fnode, new_fnode, index = 0) => {
 
 	if (remainder < 0) {
 		// remainder is negative, old has more children
-		diffs.push(old_children.slice(diff_len, diff_len - remainder).map((_, i) => deletion(i + diff_len)))
+		old_children.slice(diff_len, diff_len - remainder).map((_, i) => deletion(i + diff_len)).forEach(x => diffs.push(x))
 	} else if (remainder > 0) {
 		// remainder is positive, new has more children
-		diffs.push(new_children.slice(diff_len, diff_len + remainder).map((node, i) => insertion(i + diff_len, node)))
+		new_children.slice(diff_len, diff_len + remainder).map((node, i) => insertion(i + diff_len, node)).forEach(x => diffs.push(x))
 	}
 
 	return diffs.length > 0 ? descend(index, diffs) : null

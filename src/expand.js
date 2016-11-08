@@ -1,22 +1,23 @@
 import {
-	isArray,
 	isString,
+	isObject,
 	getLabel,
 	getMeta,
 	getChildren,
 } from './util'
+import { fnode } from './vnode'
 
 // takes vnode tree
 // tail-call optimization, collapse hnode into fnode
 const expand = vnode => {
 	for (;;) {
-		if (!isArray(vnode)) return vnode
+		if (!isObject(vnode)) return vnode
 
 		const label = getLabel(vnode)
 		const meta = getMeta(vnode)
 
 		if (isString(label)) {
-			return [label, meta, getChildren(vnode).map(expand)]
+			return fnode(label, meta, getChildren(vnode).map(expand))
 		} else {
 			vnode = label(meta)
 			continue
