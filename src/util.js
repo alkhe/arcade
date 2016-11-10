@@ -10,7 +10,7 @@ const getLabel = x => x.label
 const getMeta = x => x.meta
 const getChildren = x => x.children
 
-const own = (obj, k) => Object.prototype.hasOwnProperty.call(obj, k)
+const own = (obj, k) => obj::Object.prototype.hasOwnProperty(k)
 
 export {
 	exists,

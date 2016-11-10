@@ -39,7 +39,15 @@ const patch = (element, edits) => {
 				api.replace(element, children[index], render(edit.node))
 				break
 			case PROPS_PATCH:
-				edit.patches.forEach(({ key, prop }) => api.setProperty(element, key, prop))
+				edit.patches.forEach(p => {
+					if (p.type === DEL_PROP) {
+						api.deleteProperty(element, p.key)
+					} else if (p.type === UPD_PROP) {
+						api.setProperty(element, p.key, p.prop)
+					}
+				})
+
+				console.log(element)
 				break
 			default:
 				break

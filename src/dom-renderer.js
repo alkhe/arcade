@@ -5,6 +5,7 @@ import {
 	getMeta,
 	getChildren
 } from './util'
+import { isDataAttribute, getDataString } from './dom-util'
 import api from './dom-api'
 
 const render = fnode => {
@@ -15,7 +16,7 @@ const render = fnode => {
 	const meta = getMeta(fnode)
 	
 	for (let k in meta) if (own(meta, k)) {
-		el[k] = meta[k]
+		api.setProperty(el, k, meta[k])
 	}
 
 	const children = getChildren(fnode)

@@ -14,6 +14,6 @@
     "webpack": "2.1.0-beta.25"
   },
   "dependencies": {
-    "arcade-core": "^0.1.0"
+    "arcade-core": "^0.2.0"
   }
 }

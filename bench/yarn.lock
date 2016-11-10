@@ -43,8 +43,8 @@ aproba@^1.0.3:
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.0.4.tgz#2713680775e7614c8ba186c065d4e2e52d1072c0"
 
 arcade-core:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/arcade-core/-/arcade-core-0.1.0.tgz#5974a13f7b2ab98265011eb5810ef455a7ae36a3"
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/arcade-core/-/arcade-core-0.2.0.tgz#c1faea89f52baa012a521eac13fa5e08e8f07254"
   dependencies:
     lodash.flattendeep "^4.4.0"
     raf "^3.3.0"

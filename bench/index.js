@@ -1,7 +1,10 @@
-import { v, expand, diff } from 'arcade-core'
-import render from 'arcade-core/lib/dom-renderer'
-import patch from 'arcade-core/lib/dom-patcher'
+import { v, expand, diff } from '../src'
+import render from '../src/dom-renderer'
+import patch from '../src/dom-patcher'
 import raf from 'raf'
+// import { init, run } from './uibench'
+
+const { init, run } = uibench
 
 const TableCell = ({ text }) => <td className='TableCell' onclick={ e => (console.log(text), e.stopPropagation()) }>{ text }</td>
 
@@ -10,7 +13,7 @@ const TableRow = ({ data: { active, props, id } }) => {
 
 	const children = props.map(c => <TableCell text={ c } />)
 
-	return <tr className={ className }><TableCell text={ '#' + id }></TableCell>{ children }</tr>
+	return <tr className={ className } data-id={ id }><TableCell text={ '#' + id }></TableCell>{ children }</tr>
 }
 
 const Table = ({ data: { items } }) => {
@@ -19,13 +22,13 @@ const Table = ({ data: { items } }) => {
 	return <table className='Table'><tbody>{ children }</tbody></table>
 }
 
-const AnimBox = ({ data: { time } }) => {
+const AnimBox = ({ data: { id, time } }) => {
 	const style = {
 		borderRadius: `${ (time % 10).toString() }px`,
 		background: `rgba(0,0,0,${ (0.5 + ((time % 10) /10)).toString() })`
 	}
 
-	return <div className='AnimBox' style={ style } />
+	return <div className='AnimBox' data-id={ id } style={ style } />
 }
 
 const Anim = ({ data: { items } }) => {
@@ -54,38 +57,22 @@ const Main = ({ data, data: { location } }) => {
 	return <div className='Main'>{ section }</div>
 }
 
-uibench.init('Arcade', '0.1.0')
+init('Arcade', '0.1.0')
 
 document.addEventListener('DOMContentLoaded', () => {
 	const root = document.getElementById('root')
-
+	
 	let tree = expand(v('div', {}, []))
-	let app
-
-	let patch_buffer = []
+	let app = render(tree)
+	root.appendChild(app)
 
 	const update = new_tree => {
-		patch_buffer.push(diff(tree, expand(new_tree)).diffs)
+		let d = diff(tree, expand(new_tree))
+		patch(root, [d])
 		tree = new_tree
 	}
 
-	raf(() => {
-		app = render(tree)
-		root.appendChild(app)
-
-		raf(tick)
-	})
-
-	const tick = () => {
-		for (let i = 0; i < patch_buffer.length; i++) {
-			patch(app, patch_buffer[i])
-		}
-		patch_buffer = []
-
-		raf(tick)
-	}
-
-	uibench.run(
+	run(
 		state => update(<Main data={ state } />),
 		samples => update(<pre>{ JSON.stringify(samples, null, ' ') }</pre>)
 	)
