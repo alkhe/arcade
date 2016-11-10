@@ -1,0 +1,19 @@
+{
+  "name": "bench",
+  "version": "0.1.0",
+  "description": "UIBench Arcade",
+  "main": "index.js",
+  "author": "synchronous",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.7",
+    "babel-preset-arcade": "^0.1.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "webpack": "2.1.0-beta.25"
+  },
+  "dependencies": {
+    "arcade-core": "^0.1.0"
+  }
+}
