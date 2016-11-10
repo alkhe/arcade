@@ -1,6 +1,6 @@
 {
   "name": "arcade-core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A minimal interface for application views.",
   "main": "./lib/index.js",
   "repository": {
