@@ -380,8 +380,8 @@ babel-plugin-syntax-trailing-function-commas@^6.3.13, babel-plugin-syntax-traili
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-trailing-function-commas/-/babel-plugin-syntax-trailing-function-commas-6.13.0.tgz#2b84b7d53dd744f94ff1fad7669406274b23f541"
 
 babel-plugin-transform-arcade-jsx:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-arcade-jsx/-/babel-plugin-transform-arcade-jsx-0.5.0.tgz#7a62ee3b79a6e6c45beeb88b1fbd7cbd57282cb7"
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-arcade-jsx/-/babel-plugin-transform-arcade-jsx-0.6.0.tgz#a5619f5ea884006ccf69406909eb16d236011ba8"
   dependencies:
     babel-types "^6.18.0"
 

@@ -5,12 +5,7 @@ import {
 	getMeta,
 	getChildren
 } from './util'
-
-const api = {
-	text: string => document.createTextNode(string),
-	element: label => document.createElement(label),
-	append: (node, element) => node.appendChild(element)
-}
+import api from './dom-api'
 
 const render = fnode => {
 	if (isContent(fnode)) return api.text(String(fnode))

@@ -1,15 +1,5 @@
 import { getLabel, getMeta, getChildren, isContent, exists, own } from './util'
-
-const enumerate = (start = 0) => () => start++
-
-const DESCEND_DIFF = 'DESCEND_DIFF'
-const INSERTION = 'INSERTION'
-const DELETION = 'DELETION'
-const SUBSTITUTION = 'SUBSTITUTION'
-const PROPS_PATCH = 'PROPS_PATCH'
-
-const DEL_PROP = 'DEL_PROP'
-const UPD_PROP = 'UPD_PROP'
+import { DESCEND_DIFF, INSERTION, DELETION, SUBSTITUTION, PROPS_PATCH, DEL_PROP, UPD_PROP } from './constants'
 
 const descend = (index, diffs) => ({ type: DESCEND_DIFF, index, diffs })
 const insertion = (index, node) => ({ type: INSERTION, index, node })
@@ -101,15 +91,4 @@ const diff = (old_fnode, new_fnode, index = 0) => {
 	return diffs.length > 0 ? descend(index, diffs) : null
 }
 
-export {
-	diff,
-
-	DESCEND_DIFF,
-	INSERTION,
-	DELETION,
-	SUBSTITUTION,
-	PROPS_PATCH,
-
-	DEL_PROP,
-	UPD_PROP
-}
+export default diff

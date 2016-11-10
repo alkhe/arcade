@@ -5,7 +5,7 @@ import {
 	getMeta,
 	getChildren,
 } from './util'
-import { fnode } from './vnode'
+import v from './vnode'
 
 // takes vnode tree
 // tail-call optimization, collapse hnode into fnode
@@ -17,7 +17,7 @@ const expand = (vnode, context) => {
 		const meta = getMeta(vnode)
 
 		if (isString(label)) {
-			return fnode(label, meta, getChildren(vnode).map(vn => expand(vn, context)))
+			return v(label, meta, getChildren(vnode).map(vn => expand(vn, context)))
 		} else {
 			vnode = label(meta, context)
 			continue

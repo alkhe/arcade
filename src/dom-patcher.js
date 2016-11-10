@@ -7,8 +7,9 @@ import {
 	REPLACE_CHILDREN,
 	DEL_PROP,
 	UPD_PROP
-} from './diff'
+} from './constants'
 import render from './dom-renderer'
+import api from './dom-api'
 
 const patch = (element, edits) => {
 	let delta = 0
@@ -26,19 +27,19 @@ const patch = (element, edits) => {
 			case INSERTION:
 				let artifact = render(edit.node)
 				index < children.length
-					? element.insertBefore(children[index], artifact)
-					: element.appendChild(artifact)
+					? api.insertBefore(element, children[index], artifact)
+					: api.append(element, artifact)
 				delta++
 				break
 			case DELETION:
-				element.removeChild(children[index])
+				api.remove(element, children[index])
 				delta--
 				break
 			case SUBSTITUTION:
-				element.replaceChild(render(edit.node), children[index])
+				api.replace(element, children[index], render(edit.node))
 				break
 			case PROPS_PATCH:
-				edit.patches.forEach(({ key, prop }) => element[key] = prop)
+				edit.patches.forEach(({ key, prop }) => api.setProperty(element, key, prop))
 				break
 			default:
 				break

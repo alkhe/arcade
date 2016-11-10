@@ -1,48 +1,19 @@
 import flatten from 'lodash.flattendeep'
-import { isArray } from './util'
+import { exists, own, isString, isArray } from './util'
 
-// "first-order node"
-// label is a string (Component id)
-// meta is a map of attributes
-// children are child nodes
-// note that a first-order node can still have higher-order children
-const fnode = (label, meta, children = []) =>
-	({ label, meta, children: flatten(children) })
+const normalize = children => isArray(children) ? flatten(children) : [children]
 
-// "higher-order node"
-// label is a function (Component id)
-// meta is a map of props
-const hnode = (label, meta) => {
-	let { children } = meta
-	if (children) {
-		meta = { ...meta, children: isArray(children) ? flatten(children) : [children] }
+const vnode = (label, meta, children) => {
+	if (isString(label)) {
+		return { label, meta, children: exists(children) ? normalize(children) : [] }
+	} else {
+		if (exists(children)) {
+			meta = { ...meta, children: normalize(children) }
+		} else if (own(meta, 'children')) {
+			meta = { ...meta, children: normalize(meta.children) }
+		}
+		return { label, meta }
 	}
-	return { label, meta }
 }
 
-/*
- * Label : String | Function
- * Meta : { String Any }
- * Content : String | Number
- * Children : [VNode]
- *
- * CNode : (String, Meta, Children)
- * HNode : (Function, Meta)
- *
- * VNode : (Label, Meta) | Content
- *
- * VNode <= CNode
- * (label, meta, children)
- * =>
- * (label, meta)
- *
- * VNode <= HNode
- * (label, meta)
- * =>
- * (label, meta)
- */
-
-export {
-	fnode,
-	hnode
-}
+export default vnode
