@@ -67,9 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	root.appendChild(app)
 
 	const update = new_tree => {
-		let d = diff(tree, expand(new_tree))
-		patch(root, [d])
-		tree = new_tree
+		let artifact = expand(new_tree)
+		let d = diff(tree, artifact)
+		if (d != null) patch(root, [d])
+		tree = artifact
 	}
 
 	run(

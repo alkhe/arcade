@@ -46,8 +46,6 @@ const patch = (element, edits) => {
 						api.setProperty(element, p.key, p.prop)
 					}
 				})
-
-				console.log(element)
 				break
 			default:
 				break

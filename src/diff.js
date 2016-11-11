@@ -35,23 +35,23 @@ const diff_meta = (old_meta, new_meta) => {
 }
 
 const diff = (old_fnode, new_fnode, index = 0) => {
-	// Lemma 1
+	// Rule 1
 	// if identical fnodes, no diff required
 	// note that this requires immutable data flow
 	if (old_fnode === new_fnode) return null
 
-	// Lemma 2
+	// Rule 2
 	// if old or new node are content, substitute
 	if (isContent(old_fnode) || isContent(new_fnode)) return substitution(index, new_fnode)
 
-	// Lemma 3
+	// Rule 3
 	// if different labels, invalidate all
 	let old_label = getLabel(old_fnode)
 	let new_label = getLabel(new_fnode)
 
 	if (old_label !== new_label) return substitution(index, new_fnode)
 
-	// Lemma 4
+	// Rule 4
 	// if same labels, diff props
 	let old_meta = getMeta(old_fnode)
 	let new_meta = getMeta(new_fnode)
@@ -60,7 +60,7 @@ const diff = (old_fnode, new_fnode, index = 0) => {
 
 	let diffs = meta_diff.length > 0 ? [props_patch(index, meta_diff)] : []
 
-	// Lemma 5
+	// Rule 5
 	// patch old and new for (smaller children.length) times
 	// delete rest if old has more children
 	// insert rest if new has more children
