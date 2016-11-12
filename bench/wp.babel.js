@@ -1,9 +1,11 @@
 import { resolve } from 'path'
 
+const file = process.env.FILE
+
 export default {
-	entry: resolve('./index.js'),
+	entry: resolve(`./${ file }.js`),
 	output: {
-		filename: 'bundle.js',
+		filename: `bundle.${ file }.js`,
 		path: resolve('.')
 	},
 	module: {

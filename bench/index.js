@@ -1,7 +1,6 @@
 import { v, expand, diff } from '../src'
 import render from '../src/dom-renderer'
 import patch from '../src/dom-patcher'
-import raf from 'raf'
 // import { init, run } from './uibench'
 
 const { init, run } = uibench
