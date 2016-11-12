@@ -102,7 +102,7 @@ const Pre = data => ({
 	children: [data]
 })
 
-init('Arcade', '0.1.0-no-jsx')
+init('Arcade', '0.3.0-no-jsx')
 
 document.addEventListener('DOMContentLoaded', () => {
 	const root = document.getElementById('root')
