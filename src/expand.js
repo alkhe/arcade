@@ -1,25 +1,17 @@
-import {
-	isString,
-	isObject,
-	getLabel,
-	getMeta,
-	getChildren,
-} from './util'
-import v from './vnode'
+import { isString, isObject } from './util'
 
-// takes vnode tree
+// takes node tree
 // tail-call optimization, collapse hnode into fnode
-const expand = (vnode, context) => {
+const expand = (node, context) => {
 	for (;;) {
-		if (!isObject(vnode)) return vnode
+		if (!isObject(node)) return node
 
-		const label = getLabel(vnode)
-		const meta = getMeta(vnode)
+		const { label, meta } = node
 
 		if (isString(label)) {
-			return v(label, meta, getChildren(vnode).map(vn => expand(vn, context)))
+			return { label, meta, children: node.children.map(n => expand(n, context)) }
 		} else {
-			vnode = label(meta, context)
+			node = label(meta, context)
 			continue
 		}
 	}

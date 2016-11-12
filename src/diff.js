@@ -1,4 +1,4 @@
-import { getLabel, getMeta, getChildren, isContent, exists, own } from './util'
+import { isContent, exists, own } from './util'
 import { DESCEND_DIFF, INSERTION, DELETION, SUBSTITUTION, PROPS_PATCH, DEL_PROP, UPD_PROP } from './constants'
 
 const descend = (index, diffs) => ({ type: DESCEND_DIFF, index, diffs })
@@ -46,17 +46,11 @@ const diff = (old_fnode, new_fnode, index = 0) => {
 
 	// Rule 3
 	// if different labels, invalidate all
-	let old_label = getLabel(old_fnode)
-	let new_label = getLabel(new_fnode)
-
-	if (old_label !== new_label) return substitution(index, new_fnode)
+	if (old_fnode.label !== new_fnode.label) return substitution(index, new_fnode)
 
 	// Rule 4
 	// if same labels, diff props
-	let old_meta = getMeta(old_fnode)
-	let new_meta = getMeta(new_fnode)
-
-	let meta_diff = diff_meta(old_meta, new_meta)
+	let meta_diff = diff_meta(old_fnode.meta, new_fnode.meta)
 
 	let diffs = meta_diff.length > 0 ? [props_patch(index, meta_diff)] : []
 
@@ -64,8 +58,8 @@ const diff = (old_fnode, new_fnode, index = 0) => {
 	// patch old and new for (smaller children.length) times
 	// delete rest if old has more children
 	// insert rest if new has more children
-	let old_children = getChildren(old_fnode)
-	let new_children = getChildren(new_fnode)
+	let old_children = old_fnode.children
+	let new_children = new_fnode.children
 	let old_children_length = old_children.length
 	let new_children_length = new_children.length
 

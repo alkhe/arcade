@@ -1,20 +1,15 @@
-import {
-	isContent,
-	getLabel,
-	getMeta,
-	getChildren
-} from './util'
+import { isContent } from './util'
 import { isVoidElement, metaToAttributeString, escapeContent } from './html-util'
 
-// takes fnode tree
-const render = fnode => {
-	if (isContent(fnode)) return escapeContent(fnode)
+// takes node tree
+const render = node => {
+	if (isContent(node)) return escapeContent(node)
 
-	let label = getLabel(fnode)
+	let { label } = node
 
-	let out = `<${ label }${ metaToAttributeString(getMeta(fnode)) }>`
+	let out = `<${ label }${ metaToAttributeString(node.meta) }>`
 	if (!isVoidElement(label)) {
-		out += `${ getChildren(fnode).map(render).join('') }</${ label }>`
+		out += `${ node.children.map(render).join('') }</${ label }>`
 	}
 
 	return out

@@ -1,25 +1,19 @@
-import {
-	isContent,
-	own,
-	getLabel,
-	getMeta,
-	getChildren
-} from './util'
+import { isContent, own } from './util'
 import { isDataAttribute, getDataString } from './dom-util'
 import api from './dom-api'
 
-const render = fnode => {
-	if (isContent(fnode)) return api.text(String(fnode))
+const render = node => {
+	if (isContent(node)) return api.text(String(node))
 
-	const el = api.element(getLabel(fnode))
+	const el = api.element(node.label)
 
-	const meta = getMeta(fnode)
+	const { meta } = node
 	
 	for (let k in meta) if (own(meta, k)) {
 		api.setProperty(el, k, meta[k])
 	}
 
-	const children = getChildren(fnode)
+	const { children } = node
 
 	for (let i = 0; i < children.length; i++) {
 		api.append(el, render(children[i]))
