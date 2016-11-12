@@ -9,7 +9,7 @@ import {
 	UPD_PROP
 } from './constants'
 import render from './dom-renderer'
-import api from './dom-api'
+import { element as createElement, insertBefore, append, remove, replace, deleteProperty, setProperty } from './dom-api'
 
 const patch = (element, edits) => {
 	let delta = 0
@@ -27,23 +27,23 @@ const patch = (element, edits) => {
 			case INSERTION:
 				let artifact = render(edit.node)
 				index < children.length
-					? api.insertBefore(element, children[index], artifact)
-					: api.append(element, artifact)
+					? insertBefore(element, children[index], artifact)
+					: append(element, artifact)
 				delta++
 				break
 			case DELETION:
-				api.remove(element, children[index])
+				remove(element, children[index])
 				delta--
 				break
 			case SUBSTITUTION:
-				api.replace(element, children[index], render(edit.node))
+				replace(element, children[index], render(edit.node))
 				break
 			case PROPS_PATCH:
 				edit.patches.forEach(p => {
 					if (p.type === DEL_PROP) {
-						api.deleteProperty(element, p.key)
+						deleteProperty(element, p.key)
 					} else if (p.type === UPD_PROP) {
-						api.setProperty(element, p.key, p.prop)
+						setProperty(element, p.key, p.prop)
 					}
 				})
 				break

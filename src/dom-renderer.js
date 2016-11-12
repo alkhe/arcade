@@ -1,22 +1,22 @@
 import { isContent, own } from './util'
 import { isDataAttribute, getDataString } from './dom-util'
-import api from './dom-api'
+import { text, element, setProperty, append } from './dom-api'
 
 const render = node => {
-	if (isContent(node)) return api.text(String(node))
+	if (isContent(node)) return text(String(node))
 
-	const el = api.element(node.label)
+	const el = element(node.label)
 
 	const { meta } = node
 	
 	for (let k in meta) if (own(meta, k)) {
-		api.setProperty(el, k, meta[k])
+		setProperty(el, k, meta[k])
 	}
 
 	const { children } = node
 
 	for (let i = 0; i < children.length; i++) {
-		api.append(el, render(children[i]))
+		append(el, render(children[i]))
 	}
 
 	return el
