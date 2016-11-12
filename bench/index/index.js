@@ -57,7 +57,7 @@ const Main = ({ data, data: { location } }) => {
 	return <div className='Main'>{ section }</div>
 }
 
-init('Arcade', '0.1.0')
+init('Arcade', '0.1.0-index')
 
 document.addEventListener('DOMContentLoaded', () => {
 	const root = document.getElementById('root')
