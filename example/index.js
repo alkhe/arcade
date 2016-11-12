@@ -1,4 +1,4 @@
-import { v } from '../src'
+import v from '../src/vnode'
 import { connect, run } from '../src/redux-dom'
 import { createStore, combineReducers } from 'redux'
 

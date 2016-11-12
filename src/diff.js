@@ -35,10 +35,15 @@ const diff_meta = (old_meta, new_meta) => {
 }
 
 const diff = (old_fnode, new_fnode, index = 0) => {
-	// Rule 1
+	// Rule 0
 	// if identical fnodes, no diff required
 	// note that this requires immutable data flow
 	if (old_fnode === new_fnode) return null
+
+	// Rule 1
+	// if either is null, invalidate all
+	if (!exists(old_fnode)) return insertion(index, new_fnode)
+	if (!exists(new_fnode)) return deletion(index)
 
 	// Rule 2
 	// if old or new node are content, substitute
