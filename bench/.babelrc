@@ -1,1 +1,1 @@
-{ "presets": ["stage-0", "latest", "arcade"] }
+{ "presets": ["es2015-loose", "arcade"] }
