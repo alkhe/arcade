@@ -1,9 +1,8 @@
-import v from '../src/vnode'
-import expand from '../src/expand'
-import diff from '../src/diff'
-import render from '../src/dom-renderer'
-import patch from '../src/dom-patcher'
-// import { init, run } from './uibench'
+import v from '../../src/vnode'
+import expand from '../../src/expand'
+import diff from '../../src/diff'
+import render from '../../src/dom-renderer'
+import patch from '../../src/dom-patcher'
 
 const { init, run } = uibench
 
